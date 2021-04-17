@@ -139,7 +139,7 @@ def lista_tiporiscos(request):
     data = {}
     data['tiporicos'] = tiporicos
     data['form'] = form
-    return render(request, 'core/lista_tiporicos.html', data)
+    return render(request, 'core/lista_tiporiscos.html', data)
 
 
 def tiporisco_novo(request):
@@ -178,4 +178,4 @@ def tiporisco_delete(request, id):
     tiporisco = TipoRisco.objects.get(id=id)
     tiporisco.delete()
     messages.success(request, 'Registro Excluido com sucesso !')
-    return redirect('lista_setores')
+    return redirect('lista_tiposricos')
