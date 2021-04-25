@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpRequest
 from django.core.paginator import Paginator
-from .models import Funcao, Setor, TipoRisco, Risco, Exame
-from .forms import FuncaoForm, SetorForm, TipoRiscoForm, RiscoForm, ExameForm
+from .models import Funcao, Setor, TipoRisco, Risco, Exame, Grupo
+from .forms import FuncaoForm, SetorForm, TipoRiscoForm, RiscoForm, ExameForm, GrupoForm
 
 # Create your views here.
 def home(request):
@@ -283,3 +283,52 @@ def exame_delete(request, id):
     messages.success(request, 'Registro Excluido com sucesso !')
     return redirect('lista_exames')
 
+def lista_grupos(request):
+    form = GrupoForm
+    grupos = Grupo.objects.all().order_by('nome')
+    data = {}
+    data['grupos'] = grupos
+    data['form'] = form
+    return render(request, 'core/lista_grupos.html', data)
+
+def grupo_novo(request):
+    if request.method == "POST":
+        nome = request.POST.get('nome')
+        count = Grupo.objects.filter(nome=nome).count()
+        if count > 0:
+            messages.error(request, 'Registro já cadastrado com este Nome !')
+            return redirect('grupo_novo')
+        else:
+            form = GrupoForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('lista_grupos')
+    else:
+        form = GrupoForm
+        return render(request, 'core/grupo_novo.html', {'form': form})
+
+def grupo_update(request, id):
+    grupo = Grupo.objects.get(id=id)
+    form = GrupoForm(request.POST or None, instance=grupo)
+    data = {}
+    data['grupo'] = grupo
+    data['form'] = form
+    if request.method == "POST":
+        nome = request.POST.get('nome')
+        count = Grupo.objects.filter(nome=nome).exclude(id=id).count()
+        if count > 0:
+            messages.error(request, 'Registro já cadastrado com este Nome !')
+            return redirect('lista_grupos')
+        
+        if form.is_valid():
+            form.save()
+            return redirect('lista_grupos')
+    else:
+        form = GrupoForm
+        return render(request, 'core/grupo_update.html', data)
+
+def grupo_delete(request, id):
+    grupo = Grupo.objects.get(id=id)
+    grupo.delete()
+    messages.success(request, 'Registro Excluido com sucesso !')
+    return redirect('lista_grupos')

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="titulo">Tipo Risco</div>
+<div class="titulo">TIPOS DE RISCOS</div>
 <form name="form" id="form" class="form-horizontal" method="post" action="{% url 'tiporisco_update' tiporisco.id %}">
     {% csrf_token %}
     <div class="form1">
@@ -25,7 +25,7 @@
 
     <div class="form-group">
         <a href="{% url 'tiporisco_delete' tiporisco.id %}"
-        <Button type = "submit" class = "btn btn-danger btn-lg" style="float:right; margin-top:-46px;">
+        <Button type = "submit" class = "btn btn-danger btn-lg" style="float:right; margin-top:-66px;">
             <span class = "glyphicon glyphicon-edit" 
             style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Excluir</span>
         </Button>       

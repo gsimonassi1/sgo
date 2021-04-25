@@ -5,6 +5,7 @@ from .views import lista_setores, setor_novo, setor_update, setor_search, setor_
 from .views import lista_tiporiscos, tiporisco_novo, tiporisco_update, tiporisco_delete
 from .views import lista_riscos, risco_novo, risco_update, risco_delete
 from .views import lista_exames, exame_novo, exame_update, exame_delete
+from .views import lista_grupos, grupo_novo, grupo_update, grupo_delete
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -34,4 +35,10 @@ urlpatterns = [
     path('exame_novo', exame_novo, name='exame_novo'),
     path('exame_update/<int:id>', exame_update, name='exame_update'),
     path('exame_delete/<int:id>', exame_delete, name='exame_delete'),
+
+    path('lista_grupos', lista_grupos, name='lista_grupos'),
+    path('grupo_novo', grupo_novo, name='grupo_novo'),
+    path('grupo_update/<int:id>', grupo_update, name='grupo_update'),
+    path('grupo_delete/<int:id>', grupo_delete, name='grupo_delete'),
+
 ]
