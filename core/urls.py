@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path
 from .views import home, lista_funcoes, funcao_novo, funcao_update, funcao_search, funcao_delete
-from .views import lista_setores, setor_novo, setor_update, setor_delete, setor_search
+from .views import lista_setores, setor_novo, setor_update, setor_search, setor_delete
 from .views import lista_tiporiscos, tiporisco_novo, tiporisco_update, tiporisco_delete
 from .views import lista_riscos, risco_novo, risco_update, risco_delete
+from .views import lista_exames, exame_novo, exame_update, exame_delete
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -29,4 +30,8 @@ urlpatterns = [
     path('risco_update/<int:id>', risco_update, name='risco_update'),
     path('risco_delete/<int:id>', risco_delete, name='risco_delete'),
 
+    path('lista_exames', lista_exames, name='lista_exames'),
+    path('exame_novo', exame_novo, name='exame_novo'),
+    path('exame_update/<int:id>', exame_update, name='exame_update'),
+    path('exame_delete/<int:id>', exame_delete, name='exame_delete'),
 ]
