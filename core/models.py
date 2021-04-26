@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Funcao (models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
@@ -10,6 +11,7 @@ class Funcao (models.Model):
     class Meta:
         db_table = 'funcao'
 
+
 class Setor (models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
 
@@ -18,6 +20,7 @@ class Setor (models.Model):
 
     class Meta:
         db_table = 'setor'
+
 
 class TipoRisco(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
@@ -28,12 +31,14 @@ class TipoRisco(models.Model):
     class Meta:
         db_table = 'tiporisco'
 
+
 class Risco(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
     tiporisco = models.ForeignKey('tiporisco', on_delete=models.CASCADE)
     
     class Meta:
         db_table = 'risco'
+
 
 class Grupo(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
@@ -43,6 +48,7 @@ class Grupo(models.Model):
 
     class Meta:
         db_table = 'grupo'
+
 
 class Exame(models.Model):
     nome = models.CharField(max_length=60, null=False, blank=False)
@@ -54,6 +60,7 @@ class Exame(models.Model):
     class Meta:
         db_table = 'exame'
 
+
 class TipoExame(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
 
@@ -63,6 +70,7 @@ class TipoExame(models.Model):
     class Meta:
         db_table = 'tipoexame'     
 
+
 class GrupoExame(models.Model):
     grupo = models.ForeignKey('grupo', on_delete=models.PROTECT)
     exame = models.ForeignKey('exame', on_delete=models.PROTECT)
@@ -70,6 +78,7 @@ class GrupoExame(models.Model):
 
     class Meta:
         db_table = 'grupoexame'
+
 
 class GrupoFuncao(models.Model):
     grupo = models.ForeignKey('grupo', on_delete=models.PROTECT)
@@ -79,12 +88,14 @@ class GrupoFuncao(models.Model):
     class Meta:
         db_table = 'grupofuncao'
 
+
 class GrupoRisco(models.Model):
     grupo = models.ForeignKey('grupo', on_delete=models.PROTECT)
     risco = models.ForeignKey('risco', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'gruporisco'
+
 
 class Coordenador(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
@@ -94,6 +105,7 @@ class Coordenador(models.Model):
 
     class Meta:
         db_table = 'coordenador'
+
 
 class Empregado(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
@@ -110,6 +122,7 @@ class Empregado(models.Model):
     class Meta:
         db_table = 'empregado'
 
+
 class Atendimento(models.Model):
     data_atendimento = models.DateField(null=False, blank=False)
     empregado = models.ForeignKey('Empregado', on_delete=models.PROTECT)
@@ -125,12 +138,14 @@ class Atendimento(models.Model):
     class Meta:
         db_table = 'atendimento'
 
+
 class AtendimentoRisco(models.Model):
     atendimento = models.ForeignKey('Atendimento', on_delete=models.PROTECT)
     risco = models.ForeignKey('Risco', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'atendimentorisco'
+
 
 class AtendimentoExame(models.Model):
     atendimento = models.ForeignKey('Atendimento', on_delete=models.PROTECT)
